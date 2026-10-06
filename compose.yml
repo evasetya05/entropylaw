@@ -1,0 +1,50 @@
+services:
+  db:
+    image: mariadb:11.4
+    container_name: kolaps_mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE: teori_kolaps_db
+      MYSQL_USER: kolaps_user
+      MYSQL_PASSWORD: kolaps_secret_pass
+      MYSQL_ROOT_PASSWORD: root_secret_pass
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    ports:
+      - "3307:3306" # Port 3307 lokal diteruskan ke 3306 container (menghindari konflik jika ada MySQL lokal)
+    networks:
+      - kolaps_net
+
+  web:
+    build: .
+    container_name: kolaps_django_web
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8014:8000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=teori_kolaps_db
+      - DB_USER=kolaps_user
+      - DB_PASSWORD=kolaps_secret_pass
+      - DEBUG=1
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - kolaps_net
+
+volumes:
+  mariadb_data:
+
+networks:
+  kolaps_net:
+    driver: bridge

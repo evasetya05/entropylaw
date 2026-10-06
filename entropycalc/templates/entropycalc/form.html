@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7f4">
+    <title>Perkara Baru - Entropy Law</title>
+    <link rel="stylesheet" href="{% static 'entropycalc/form.css' %}">
+</head>
+<body>
+    <main class="page-shell">
+        <header class="topbar">
+            <a class="brand" href="{% url 'daftar_perkara' %}" aria-label="Entropy Law, kembali ke daftar perkara">
+                <span class="brand-mark" aria-hidden="true">E</span>
+                <span>entropy<span class="brand-light">law</span></span>
+            </a>
+            <a class="back-link" href="{% url 'daftar_perkara' %}">
+                <span aria-hidden="true">&larr;</span> Daftar perkara
+            </a>
+        </header>
+
+        <section class="page-intro" aria-labelledby="page-title">
+            <p class="eyebrow"><span class="eyebrow-dot"></span> RUANG ANALISIS <span class="eyebrow-divider">/</span> PERKARA BARU</p>
+            <h1 id="page-title">Mulai analisis perkara</h1>
+            <p class="intro-copy">Lengkapi identitas perkara dan nilai setiap parameter untuk menghitung skor entropi yudisial.</p>
+        </section>
+
+        <form class="case-form" method="post">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="error-summary" role="alert">
+                    <strong>Periksa kembali data yang dimasukkan.</strong>
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <section class="form-section" aria-labelledby="identity-title">
+                <div class="section-heading">
+                    <span class="section-number">01</span>
+                    <div>
+                        <h2 id="identity-title">Identitas perkara</h2>
+                        <p>Informasi dasar untuk mengenali dan mengelompokkan perkara.</p>
+                    </div>
+                </div>
+                <div class="identity-grid">
+                    <div class="field">
+                        {{ form.nomor_perkara.label_tag }}
+                        {{ form.nomor_perkara }}
+                        {{ form.nomor_perkara.errors }}
+                    </div>
+                    <div class="field">
+                        {{ form.judul_kasus.label_tag }}
+                        {{ form.judul_kasus }}
+                        {{ form.judul_kasus.errors }}
+                    </div>
+                    <div class="field field-category">
+                        {{ form.jenis_perkara.label_tag }}
+                        {{ form.jenis_perkara }}
+                        {{ form.jenis_perkara.errors }}
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section" aria-labelledby="parameters-title">
+                <div class="section-heading">
+                    <span class="section-number">02</span>
+                    <div>
+                        <h2 id="parameters-title">Parameter analisis</h2>
+                        <p>Gunakan skala 0–10. Nilai validasi metode minimal 0,1.</p>
+                    </div>
+                    <span class="scale-badge">SKALA 0–10</span>
+                </div>
+                <div class="score-grid">
+                    <div class="field">
+                        {{ form.l1_fakta_dasar.label_tag }}
+                        {{ form.l1_fakta_dasar }}
+                        {{ form.l1_fakta_dasar.errors }}
+                    </div>
+                    <div class="field">
+                        {{ form.l5_keraguan_pengujian.label_tag }}
+                        {{ form.l5_keraguan_pengujian }}
+                        {{ form.l5_keraguan_pengujian.errors }}
+                    </div>
+                    <div class="field">
+                        {{ form.l6_konsistensi_logika.label_tag }}
+                        {{ form.l6_konsistensi_logika }}
+                        {{ form.l6_konsistensi_logika.errors }}
+                    </div>
+                    <div class="field">
+                        {{ form.l7_validasi_metode.label_tag }}
+                        {{ form.l7_validasi_metode }}
+                        {{ form.l7_validasi_metode.errors }}
+                    </div>
+                    <div class="field">
+                        {{ form.l11_konklusi_putusan.label_tag }}
+                        {{ form.l11_konklusi_putusan }}
+                        {{ form.l11_konklusi_putusan.errors }}
+                    </div>
+                    <div class="field">
+                        {{ form.l12_keadilan_sosial.label_tag }}
+                        {{ form.l12_keadilan_sosial }}
+                        {{ form.l12_keadilan_sosial.errors }}
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section notes-section" aria-labelledby="notes-title">
+                <div class="section-heading">
+                    <span class="section-number">03</span>
+                    <div>
+                        <h2 id="notes-title">Catatan analisis <span class="optional-label">OPSIONAL</span></h2>
+                        <p>Tambahkan konteks atau alasan di balik penilaian parameter.</p>
+                    </div>
+                </div>
+                <div class="field">
+                    {{ form.catatan_analisis }}
+                    {{ form.catatan_analisis.errors }}
+                </div>
+            </section>
+
+            <footer class="form-footer">
+                <p><span class="required-mark">*</span> Kolom identitas dan parameter wajib diisi.</p>
+                <button class="submit-button" type="submit">
+                    Simpan dan hitung <span aria-hidden="true">&rarr;</span>
+                </button>
+            </footer>
+        </form>
+        <p class="page-footnote">Entropy Law <span aria-hidden="true">·</span> Analisis yang terukur, keputusan yang lebih jernih.</p>
+    </main>
+</body>
+</html>

@@ -1,0 +1,125 @@
+==========================================
+
+Python & Bytecode
+
+==========================================
+
+pycache/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+==========================================
+
+Virtual Environments
+
+==========================================
+
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+==========================================
+
+Django Specific
+
+==========================================
+
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+==========================================
+
+Environment Variables & Secrets
+
+==========================================
+
+.env
+.env.local
+.env.*.local
+*.env
+
+==========================================
+
+Docker & Database Volumes
+
+==========================================
+
+Direktori data database lokal jika di-mount ke host
+
+mariadb_data/
+mysql_data/
+docker-compose.override.yml
+
+==========================================
+
+IDE & Code Editors
+
+==========================================
+
+VS Code
+
+.vscode/
+*.code-workspace
+
+PyCharm / IntelliJ
+
+.idea/
+*.iws
+*.iml
+*.ipr
+
+Sublime Text / Atom
+
+*.sublime-project
+*.sublime-workspace
+
+OS Generated
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+==========================================
+
+Testing & Coverage
+
+==========================================
+
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+htmlcov/
+.pytest_cache/

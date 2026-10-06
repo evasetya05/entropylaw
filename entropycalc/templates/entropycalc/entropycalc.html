@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Hasil Analisis Entropi Yudisial</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container py-4">
+    <h2>Hasil Evaluasi Teori Kolaps (FILM-FEKY12)</h2>
+    <div class="card my-3">
+        <div class="card-header font-weight-bold">
+            No. Perkara: {{ perkara.nomor_perkara }} - {{ perkara.judul_kasus }}
+        </div>
+        <div class="card-body">
+            <h4>Skor Entropi (E): <span class="badge bg-primary">{{ perkara.nilai_e }}</span></h4>
+            <h5>Status: 
+                {% if perkara.nilai_e >= 1.0 %}
+                    <span class="badge bg-success">{{ perkara.zona }}</span>
+                {% elif perkara.nilai_e >= 0 %}
+                    <span class="badge bg-warning text-dark">{{ perkara.zona }}</span>
+                {% else %}
+                    <span class="badge bg-danger">{{ perkara.zona }}</span>
+                {% endif %}
+            </h5>
+            <hr>
+            <p><strong>Fakta Dasar (L1):</strong> {{ perkara.l1_fakta_dasar }}</p>
+            <p><strong>Keraguan/Asumsi (L5):</strong> {{ perkara.l5_keraguan_pengujian }}</p>
+            <p><strong>Inkonsistensi (L6):</strong> {{ perkara.l6_konsistensi_logika }}</p>
+            <p><strong>Beban Klaim/Validasi Forensik (L7):</strong> {{ perkara.l7_validasi_metode }}</p>
+            <p><strong>Keadilan Sosial (L12):</strong> {{ perkara.l12_keadilan_sosial }}</p>
+        </div>
+    </div>
+    <a href="{% url 'daftar_perkara' %}" class="btn btn-secondary">Kembali ke Daftar</a>
+</body>
+</html>
