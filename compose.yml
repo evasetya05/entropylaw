@@ -16,7 +16,7 @@ services:
       timeout: 5s
       retries: 12
     ports:
-      - "3307:3306" # Port 3307 lokal diteruskan ke 3306 container (menghindari konflik jika ada MySQL lokal)
+      - "3309:3306" # Port 3307 lokal diteruskan ke 3306 container (menghindari konflik jika ada MySQL lokal)
     networks:
       - kolaps_net
 
