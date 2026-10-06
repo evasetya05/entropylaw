@@ -4,10 +4,10 @@ services:
     container_name: kolaps_mariadb
     restart: always
     environment:
-      MYSQL_DATABASE: teori_kolaps_db
-      MYSQL_USER: kolaps_user
-      MYSQL_PASSWORD: kolaps_secret_pass
-      MYSQL_ROOT_PASSWORD: root_secret_pass
+      MYSQL_DATABASE: ${DB_NAME:-teori_kolaps_db}
+      MYSQL_USER: ${DB_USER:-kolaps_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-kolaps_secret_pass}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_secret_pass}
     volumes:
       - mariadb_data:/var/lib/mysql
     healthcheck:
@@ -30,12 +30,14 @@ services:
     ports:
       - "8014:8000"
     environment:
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_NAME=teori_kolaps_db
-      - DB_USER=kolaps_user
-      - DB_PASSWORD=kolaps_secret_pass
-      - DEBUG=1
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-teori_kolaps_db}
+      DB_USER: ${DB_USER:-kolaps_user}
+      DB_PASSWORD: ${DB_PASSWORD:-kolaps_secret_pass}
+      SECRET_KEY: ${SECRET_KEY:-django-insecure-development-only-change-me}
+      DEBUG: ${DEBUG:-1}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,entropylaw.teknusa.com}
     depends_on:
       db:
         condition: service_healthy
